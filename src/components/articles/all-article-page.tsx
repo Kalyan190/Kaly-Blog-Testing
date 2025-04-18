@@ -2,37 +2,67 @@ import React from 'react'
 import { Card } from '../ui/card'
 import Image from 'next/image'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+import {fetchArticleByQuery} from '@/lib/query/fetch-article-by-query'
+import { Search } from 'lucide-react'
 
-const AllArticlePage = () => {
+type AllArticlePageProps = {
+   searchText:string
+}
+
+const AllArticlePage : React.FC<AllArticlePageProps> = async({searchText}) => {
+
+   const articles = await fetchArticleByQuery(searchText);
+
+   if(articles.length <= 0){
+      return <NoSearchResultPage/>
+   }
+
   return (
     <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3'>
-      <Card className='group relative overflow-hidden translate-all hover:shadow-lg '>
-         <div className='p-6'>
-            <div className='relative mb-4 h-48 w-full overflow-hidden rounded-xl '>
-                 <Image src={'https://plus.unsplash.com/premium_photo-1666277012916-1c1c7bc88122?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxOHx8fGVufDB8fHx8fA%3D%3D'} alt='Image' fill className='object-cover'/>
-            </div>
-             
-             {/* Article content */}
+      {
+         articles.map((article)=>(
+            <Card key={article.id} className='group relative overflow-hidden translate-all hover:shadow-lg '>
+               <div className='p-6'>
+                  <div className='relative mb-4 h-48 w-full overflow-hidden rounded-xl '>
+                     <Image src={article.featuredImage} alt='Image' fill className='object-cover' />
+                  </div>
 
-             <h3 className='text-xl font-semibold'>Title</h3>
-             <p className='text-sm mt-2'>Web Developement</p>
+                  {/* Article content */}
 
-             <div className='mt-6 flex items-center justify-between'>
-                 <div className='flex items-center gap-3'>
-                    <Avatar>
-                      <AvatarImage src=''/>
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                    <span className='text-sm'>Kalyan</span>
-                 </div>
-                 <div className='text-sm '>
-                     16 Apr 
-                 </div>
-             </div>
-         </div>
-      </Card>
+                  <h3 className='text-xl font-semibold'>{article.title}</h3>
+                  <p className='text-sm mt-2'>{article.category}</p>
+
+                  <div className='mt-6 flex items-center justify-between'>
+                     <div className='flex items-center gap-3'>
+                        <Avatar>
+                           <AvatarImage src={article.author.imageUrl || ''} />
+                           <AvatarFallback>CN</AvatarFallback>
+                        </Avatar>
+                        <span className='text-sm'>{article.author.name}</span>
+                     </div>
+                     <div className='text-sm '>
+                        {article.createdAt.toDateString()}
+                     </div>
+                  </div>
+               </div>
+            </Card>
+         ))
+      }
+      
    </div>
   )
 }
 
-export default AllArticlePage
+export default AllArticlePage;
+
+const NoSearchResultPage = ()=>{
+   return (
+      <div className='flex flex-col items-center justify-center p-8 text-center'>
+          <div className='mb-4 rounded-full bg-muted p-4 '>
+              <Search className='h-8 w-8'/>
+          </div>
+          <h3 className='font-medium'>No Result Found.</h3>
+          <p className='mt-2 text-sm'>We could not find any articles matching your search. Try a different keywords or phrase.</p>
+      </div>
+   )
+}
