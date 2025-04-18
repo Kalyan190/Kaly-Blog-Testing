@@ -39,7 +39,10 @@ const AboutPage: React.FC = () => {
             <div className="mt-12 bg-blue-50 dark:bg-primary-foreground p-6 rounded-xl shadow-sm dark:border dark:border-white dark:text-white">
                <h3 className="text-xl font-semibold mb-2">Want to Connect?</h3>
                <p className="text-gray-700 mb-4 dark:text-white">
-                  We're always excited to meet new people! Reach out to us via email or follow us on our socials.
+                  We&apos;re here to explore, learn, and grow – one post at a time.
+                  Whether you&apos;re a seasoned dev or a curious mind, there&apos;s something here for you.
+                  We&apos;re always excited to meet new people! Reach out to us via email or follow us on our socials.
+
                </p>
                <div className="flex justify-center space-x-4">
                   <a href="#" className="text-blue-500 hover:underline">Twitter</a>

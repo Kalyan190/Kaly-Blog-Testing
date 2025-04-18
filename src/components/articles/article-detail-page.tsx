@@ -1,7 +1,6 @@
 import type { Prisma } from '@prisma/client'
 import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import Image from 'next/image'
 import LikeButton from './like-button'
 import CommentsList from '../comments/comments-list'
 import CommentInput from '../comments/comment-input'

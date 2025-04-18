@@ -110,7 +110,7 @@ export const editArticle = async (articleId: string,prevState: createArticleForm
                   }
                }
             }
-         } catch (error) {
+         } catch (_error) {
              return {
                errors: {
                   formErrors: ['Error uploading image. Please try again!']
@@ -118,12 +118,6 @@ export const editArticle = async (articleId: string,prevState: createArticleForm
              }
          }
       }
-
-      
-
-     
-
-     
 
 
       if(!imageUrl){
