@@ -25,7 +25,7 @@ type RecentArticlesProps = {
 
 const RecentArticles: React.FC<RecentArticlesProps> = (articles) => {
    return (
-      <Card className='mb-8'>
+      <Card className='mt-8 mb-8'>
          <CardHeader>
             <div className='flex items-center justify-between'>
                <CardTitle>

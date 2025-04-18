@@ -1,5 +1,4 @@
 import BlogFooter from "@/components/home/blog-footer";
-import Navbar from "@/components/home/header/navbar";
 import HeroSection from "@/components/home/hero-section";
 import TopArticles from "@/components/home/top-articles";
 import { Button } from "@/components/ui/button";
@@ -8,11 +7,9 @@ import { Suspense } from "react";
 import { AllArticlesPageSkeleton } from "../articles/page";
 
 
-
 export default function Home() {
    return (
       <div className="container mx-auto">
-         <Navbar/>
          <HeroSection/>
          <section className="relative py-16 md:py-24 ">
             <div className="container mx-auto px-4 md:px-8 lg:px-16 ">
@@ -28,7 +25,7 @@ export default function Home() {
            
             <div className="mt-8 flex justify-center">
                <Link href={`/articles`}>
-               <Button className="rounded-full hover:bg-gray-900 hover:text-white dark:bg-white dark:hover:text-gray-900">View all articles</Button>
+               <Button className="rounded-full hover:bg-gray-900 hover:text-white dark:bg-white dark:hover:text-gray-900 cursor-pointer">View all articles</Button>
                </Link>
             </div>
             </div>

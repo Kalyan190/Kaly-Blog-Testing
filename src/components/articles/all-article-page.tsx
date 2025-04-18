@@ -2,16 +2,27 @@ import React from 'react'
 import { Card } from '../ui/card'
 import Image from 'next/image'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import {fetchArticleByQuery} from '@/lib/query/fetch-article-by-query'
 import { Search } from 'lucide-react'
+import type { Prisma } from '@prisma/client'
+import Link from 'next/link'
 
 type AllArticlePageProps = {
-   searchText:string
+   articles :Prisma.ArticlesGetPayload<{
+      include: {
+         author:{
+            select:{
+               name: true,
+               email: true,
+               imageUrl: true
+            }
+         }
+      }
+   }>[]
 }
 
-const AllArticlePage : React.FC<AllArticlePageProps> = async({searchText}) => {
+const AllArticlePage : React.FC<AllArticlePageProps> = async({articles}) => {
 
-   const articles = await fetchArticleByQuery(searchText);
+   // const articles = await fetchArticleByQuery(searchText);
 
    if(articles.length <= 0){
       return <NoSearchResultPage/>
@@ -22,6 +33,7 @@ const AllArticlePage : React.FC<AllArticlePageProps> = async({searchText}) => {
       {
          articles.map((article)=>(
             <Card key={article.id} className='group relative overflow-hidden translate-all hover:shadow-lg '>
+               <Link href={`/articles/${article.id}`} >
                <div className='p-6'>
                   <div className='relative mb-4 h-48 w-full overflow-hidden rounded-xl '>
                      <Image src={article.featuredImage} alt='Image' fill className='object-cover' />
@@ -45,6 +57,7 @@ const AllArticlePage : React.FC<AllArticlePageProps> = async({searchText}) => {
                      </div>
                   </div>
                </div>
+               </Link>
             </Card>
          ))
       }

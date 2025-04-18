@@ -2,6 +2,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import React from "react";
 import {prisma}  from "@/lib/prisma";
 
+
 const layout = async ({ children }: { children: React.ReactNode }) => {
    
    const user = await currentUser();
@@ -23,6 +24,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
    }
    return (
       <div>
+        
          {children}
       </div>
    );
