@@ -16,7 +16,7 @@ const AboutPage: React.FC = () => {
                   alt="Blog inspiration"
                   width={500}
                   height={150}
-                  className="rounded-2xl shadow-lg  object-cover mb-10 dark:shadow-md dark:shadow-white"
+                  className="rounded-2xl shadow-lg object-cover mb-10 dark:shadow-md dark:shadow-white"
                />
             </div>
             <div className="grid md:grid-cols-2 gap-8 text-left dark:text-white">
@@ -24,14 +24,14 @@ const AboutPage: React.FC = () => {
                   <h2 className="text-2xl font-semibold mb-2">👋 Who We Are</h2>
                   <p className="text-gray-700 dark:text-white">
                      A passionate group of developers, designers, and storytellers who believe in the power of words and clean code.
-                     We're here to explore, learn, and grow – one post at a time.
+                     We&apos;re here to explore, learn, and grow – one post at a time.
                   </p>
                </div>
                <div className="border border-gray-200 rounded-md p-4 shadow-xl">
                   <h2 className="text-2xl font-semibold mb-2">🌟 Our Mission</h2>
                   <p className="text-gray-700 dark:text-white">
                      To create a space where curiosity is celebrated and knowledge is shared freely.
-                     Whether you're a seasoned dev or a curious mind, there's something here for you.
+                     Whether you&apos;re a seasoned dev or a curious mind, there&apos;s something here for you.
                   </p>
                </div>
             </div>
@@ -42,7 +42,6 @@ const AboutPage: React.FC = () => {
                   We&apos;re here to explore, learn, and grow – one post at a time.
                   Whether you&apos;re a seasoned dev or a curious mind, there&apos;s something here for you.
                   We&apos;re always excited to meet new people! Reach out to us via email or follow us on our socials.
-
                </p>
                <div className="flex justify-center space-x-4">
                   <a href="#" className="text-blue-500 hover:underline">Twitter</a>
