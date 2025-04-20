@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import { Button } from '../../ui/button';
 import SearchInput from './searchInput';
 import { ToggleMode } from './toggle-mode';
@@ -42,7 +42,9 @@ const Navbar = () => {
                </div>
 
                <div className='flex items-center gap-4'>
-                  <SearchInput />
+                  <Suspense>
+                     <SearchInput />
+                  </Suspense>
                   <ToggleMode />
 
                   {/*Auth Button for Desktop*/}
@@ -76,15 +78,17 @@ const Navbar = () => {
             <div className="md:hidden py-4 space-y-4 border-t">
                {/* Search Bar (Mobile) */}
                <div className="px-4">
-                  <form action={searchAction} className="relative">
-                     <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                     <Input
-                        type="search"
-                        name='search'
-                        placeholder="Search articles..."
-                        className="pl-10 w-full focus-visible:ring-1"
-                     />
-                  </form>
+                  <Suspense>
+                     <form action={searchAction} className="relative">
+                        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                        <Input
+                           type="search"
+                           name='search'
+                           placeholder="Search articles..."
+                           className="pl-10 w-full focus-visible:ring-1"
+                        />
+                     </form>
+                  </Suspense>
                </div>
 
                {/* Mobile Navigation Links */}

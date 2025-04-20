@@ -1,11 +1,11 @@
 import CreateArticlesPage from '@/components/articles/create-articles-page'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 const page = () => {
   return (
-    <div>
-      <CreateArticlesPage/>
-    </div>
+     <Suspense fallback={<div>Loading article editor...</div>}>
+        <CreateArticlesPage />
+     </Suspense>
   )
 }
 

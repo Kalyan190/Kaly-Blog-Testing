@@ -1,22 +1,24 @@
-import ArticleSearchInput from "@/components/articles/article-search-input";
 import { Button } from "@/components/ui/button";
 import React, { Suspense } from "react";
-import { Card } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-
 import Link from "next/link";
 import { fetchArticleByQuery } from "@/lib/query/fetch-article-by-query";
 import AllArticlePage from "@/components/articles/all-article-page";
+import { Card } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { SearchInput } from "@/components/articles/article-search-input";
+
+
+
 
 type SearchPageProps = {
-   searchParams: { search?: string; page?: string };
+   searchParams: Promise<{ search?: string; page?: string }>;
 };
 
-const ITEMS_PER_PAGE = 3; // Number of items per page
+const ITEMS_PER_PAGE = 3;
 
 const page: React.FC<SearchPageProps> = async ({ searchParams }) => {
-   const searchText = searchParams.search || "";
-   const currentPage = Number(searchParams.page) || 1;
+   const searchText = (await searchParams).search || "";
+   const currentPage = Number((await searchParams).page) || 1;
    const skip = (currentPage - 1) * ITEMS_PER_PAGE;
    const take = ITEMS_PER_PAGE;
 
@@ -33,14 +35,18 @@ const page: React.FC<SearchPageProps> = async ({ searchParams }) => {
                   All Articles
                </h1>
                {/* Search Bar */}
-               <Suspense fallback={<h1>searching...</h1>}>
-                  <ArticleSearchInput />
+
+               <Suspense fallback={<div>Loading Search...</div>}>
+                  <SearchInput/>
                </Suspense>
+
             </div>
             {/* All article page  */}
+
             <Suspense fallback={<AllArticlesPageSkeleton />}>
                <AllArticlePage articles={articles} />
             </Suspense>
+
             {/* <AllArticlesPageSkeleton/> */}
             {/* Pagination */}
             <div className="mt-12 flex justify-center gap-2">
