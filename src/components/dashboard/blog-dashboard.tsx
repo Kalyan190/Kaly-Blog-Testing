@@ -48,8 +48,9 @@ const BlogDashBoard = async () => {
    ]);
     
    return (
+      <div className='overflow-y-scroll'>
       <main className='flex-1 p-4 md:p-8'>
-         <div className='flex justify-between items-center mb-8'>
+         <div className='flex justify-between items-center mb-8 max-sm:flex-col max-sm:gap-4 '>
             <div>
                <h1 className='font-bold text-2xl'>Blog Dashboard</h1>
                <p>Manage your content and analytics</p>
@@ -60,7 +61,7 @@ const BlogDashBoard = async () => {
          </div>
 
          <div className='grid md:grid-cols-3 gap-4'>
-            <Card>
+            <Card >
                <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
                   <CardTitle className='font-medium text-sm'>Total Articles</CardTitle>
                   <FileText className='h-4 w-4' />
@@ -71,7 +72,7 @@ const BlogDashBoard = async () => {
                </CardContent>
             </Card>
 
-            <Card>
+            <Card >
                <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
                   <CardTitle className='font-medium text-sm'>Total Comments</CardTitle>
                   <MessageCircle className='h-4 w-4' />
@@ -95,6 +96,7 @@ const BlogDashBoard = async () => {
          </div>
          <RecentArticles articles={articles}/>
       </main>
+      </div>
    )
 }
 
