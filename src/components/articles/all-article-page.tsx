@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Search } from 'lucide-react'
 import type { Prisma } from '@prisma/client'
 import Link from 'next/link'
+import { cn } from '@/lib/utils'
 
 type AllArticlePageProps = {
    articles :Prisma.ArticlesGetPayload<{
@@ -32,7 +33,7 @@ const AllArticlePage : React.FC<AllArticlePageProps> = async({articles}) => {
     <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3'>
       {
          articles.map((article)=>(
-            <Card key={article.id} className='group relative overflow-hidden translate-all hover:shadow-lg '>
+            <Card key={article.id} className={cn("group relative overflow-hidden transition-all hover:scale-[1.02]", "border border-gray-200/50 dark:border-white/80", "bg-white/50 dark:bg-gray-900/50 backdrop-blur-lg")}>
                <Link href={`/articles/${article.id}`} >
                <div className='p-6'>
                   <div className='relative mb-4 h-48 w-full overflow-hidden rounded-xl '>

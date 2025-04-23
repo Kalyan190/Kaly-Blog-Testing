@@ -1,5 +1,7 @@
+import Unauthorized from '@/app/unauthorized';
 import ArticleDetailPage from '@/components/articles/article-detail-page';
 import { prisma } from '@/lib/prisma';
+import { auth } from '@clerk/nextjs/server';
 import React from 'react'
 
 type ArticleDetailPage = {
@@ -7,7 +9,14 @@ type ArticleDetailPage = {
 }
 
 const page : React.FC<ArticleDetailPage> = async({params}) => {
-    const id = (await params).id;
+    
+   const {userId} = await auth();
+      if(!userId){
+         return <Unauthorized/>
+      }
+   
+   const id = (await params).id;
+
 
     const article = await prisma.articles.findUnique({
       where: {id},

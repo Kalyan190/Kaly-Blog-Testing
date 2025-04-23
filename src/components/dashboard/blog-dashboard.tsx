@@ -5,13 +5,27 @@ import { Clock, FileText, MessageCircle, PlusCircle } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import RecentArticles from './recent-articles'
 import { prisma } from '@/lib/prisma'
+import { auth } from '@clerk/nextjs/server'
 
 const BlogDashBoard = async () => {
+   const {userId} = await auth();
+   if (!userId) {
+      return <div>User not found...</div>
+   }
+
+   const existingUser = await prisma.user.findUnique({
+      where: {clerkUserId: userId}
+   })
+
+   if(!existingUser){
+      return <div>Please Login Account.</div>
+   }
 
    const [articles, totalComments] = await Promise.all([
       prisma.articles.findMany({
-         orderBy: {
-            createdAt: 'desc'
+         
+         where: {
+            authorId: existingUser.id // ✅ Filter by logged-in user ID
          },
          include: {
             comments: true,
@@ -19,14 +33,20 @@ const BlogDashBoard = async () => {
                select: {
                   name: true,
                   email: true,
-                  imageUrl: true
-               }
-            }
-         }
+                  imageUrl: true,
+               },
+            },
+         },
       }),
-      prisma.comments.count(),
-   ])
-
+      prisma.comments.count({
+         where: {
+            article: {
+               authorId: userId ,
+            },
+         },
+      }),
+   ]);
+    
    return (
       <main className='flex-1 p-4 md:p-8'>
          <div className='flex justify-between items-center mb-8'>

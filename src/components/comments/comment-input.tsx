@@ -20,10 +20,10 @@ const CommentInput : React.FC<CommentInputProps> = ({articleId}) => {
       <div className='flex gap-4 '>
           <Avatar>
             <AvatarImage src=''/>
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback className='dark:text-white'>CN</AvatarFallback>
           </Avatar>
           <div className='flex-1'>
-              <Input type='text' name='body' placeholder='Add a comment...' />
+              <Input className='dark:border border-gray-200' type='text' name='body' placeholder='Add a comment...' />
               {
                formState.errors.body && (<p className='text-red-600 text-sm'>{formState.errors.body}</p>)
               }

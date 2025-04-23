@@ -1,33 +1,39 @@
 import { currentUser } from "@clerk/nextjs/server";
 import React from "react";
-import {prisma}  from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
+const Layout = async ({ children }: { children: React.ReactNode }) => {
+   try {
+      const user = await currentUser();
 
-const layout = async ({ children }: { children: React.ReactNode }) => {
-   
-   const user = await currentUser();
-   if (!user) {
-      return null;
-   }
-   const loggedInUser = await prisma.user.findUnique({
-      where: { clerkUserId: user.id },
-   });
-   if (!loggedInUser) {
-      await prisma.user.create({
-         data: {
-            name: `${user.fullName} ${user.lastName}`,
-            clerkUserId: user.id,
-            email: user.emailAddresses[0].emailAddress,
-            imageUrl: user.imageUrl,
-         },
+      if (!user) {
+         return <>{children}</>;
+      }
+
+      const existingUser = await prisma.user.findUnique({
+         where: { clerkUserId: user.id },
       });
+
+      if (!existingUser) {
+         await prisma.user.create({
+            data: {
+               name: user.fullName ?? user.lastName ?? "Unknown User",
+               clerkUserId: user.id,
+               email: user.emailAddresses[0]?.emailAddress ?? "no-email@unknown.com",
+               imageUrl: user.imageUrl ?? "",
+            },
+         });
+      }
+
+      return <div>{children}</div>;
+   } catch (error) {
+      console.error("Error in Layout:", error);
+      return (
+         <div className="text-red-600 p-4">
+            Something went wrong. Please try again later.
+         </div>
+      );
    }
-   return (
-      <div>
-        
-         {children}
-      </div>
-   );
 };
 
-export default layout;
+export default Layout;

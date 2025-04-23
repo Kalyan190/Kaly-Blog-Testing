@@ -41,6 +41,7 @@ const ArticleDetailPage : React.FC<ArticleDetailPageProps> = async({article}) =>
       }
    })
    const {userId} = await auth();
+   
    const user = await prisma.user.findUnique({
       where: {clerkUserId: userId as string}
    });
@@ -50,11 +51,11 @@ const ArticleDetailPage : React.FC<ArticleDetailPageProps> = async({article}) =>
 
   return (
     <div className='min-h-screen bg-background'>
-       <main className='container mx-auto py-12 px-4 sm:px-6 lg:px-8'>
-          <article className='max-w-3xl mx-auto'>
+       <main className='container mx-auto py-12 px-4 sm:px-6 lg:px-8 '>
+           <article className='max-w-3xl mx-auto dark:bg-white dark:text-black p-4 rounded-md'>
              <header className='mb-12'>
                 <div className='flex flex-wrap gap-2 mb-4'>
-                   <span className='rounded-full bg-primary/10 px-3 py-1 text-sm'>
+                   <span className='rounded-full bg-primary/10 dark:bg-black dark:text-white px-3 py-1 text-sm'>
                      {article.title}
                    </span>
                 </div>
@@ -72,7 +73,7 @@ const ArticleDetailPage : React.FC<ArticleDetailPageProps> = async({article}) =>
                 
              </header>
               {/* dangerouslySetInnerHTML={{ __html: article.content }} */}
-              <section className="prose prose-lg dark:prose-invert max-w-none mb-12"
+              <section className="prose-invert prose-lg dark:prose max-w-none mb-12"
                  dangerouslySetInnerHTML={{ __html: article.content }} />
                 <LikeButton articleId={article.id} isLiked={isLiked} likes={likes}/>
                 <CommentInput articleId={article.id}/>

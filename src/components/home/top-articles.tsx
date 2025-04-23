@@ -28,8 +28,8 @@ const TopArticles = async() => {
     <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3 '>
      {
       articles.slice(0,3).map((article)=> (
-         <Card key={article.id} className={cn("group relative overflow-hidden transition-all hover:scale-[1.02]", "border border-gray-200/50 dark:border-white/10", "bg-white/50 dark:bg-gray-900/50 backdrop-blur-lg")}>
-            <div className='p-6'>
+         <Card key={article.id} className={cn("group relative overflow-hidden transition-all hover:scale-[1.02]", "border border-gray-200/50 dark:border-white/80", "bg-white/50 dark:bg-gray-900/50 backdrop-blur-lg")}>
+            <div className='p-6 '>
                <Link href={`/articles/${article.id}`}>
                   <div className='relative mb-4 h-48 w-full overflow-hidden rounded-xl '>
                      <Image src={article.featuredImage} alt='card_image' fill className='object-cover' />
