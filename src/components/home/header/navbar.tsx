@@ -101,7 +101,7 @@ const Navbar = () => {
                      Articles
                   </Link>
                   <Link
-                     href="/tutorials"
+                     href="/tutorial"
                      className="block px-3 py-2 text-base font-medium text-foreground"
                      onClick={() => setIsMobileMenuOpen(false)}
                   >
