@@ -53,7 +53,7 @@ const BlogDashBoard = async () => {
          <div className='flex justify-between items-center mb-8 max-sm:flex-col max-sm:gap-4 '>
             <div>
                <h1 className='font-bold text-2xl'>Blog Dashboard</h1>
-               <p>Manage your content and analytics</p>
+               <p className='max-sm:text-xs'>Manage your content and analytics</p>
             </div>
             <Link href={'/dashboard/articles/create'}>
                <Button> <PlusCircle className='h-4 w-4' /> New Articles</Button>

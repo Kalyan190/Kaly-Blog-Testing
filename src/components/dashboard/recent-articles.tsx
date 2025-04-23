@@ -31,10 +31,10 @@ type RecentArticlesProps = {
 
 const RecentArticles: React.FC<RecentArticlesProps> = ({ articles }) => {
    return (
-      <div>
-      <Card className="mb-8 mt-8">
+      <div className="max-sm:overflow-scroll">
+      <Card className="mb-8 mt-8 max-sm:w-52">
          <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between ">
                <CardTitle>Recent Articles</CardTitle>
                <Button variant="ghost" size="sm" className="text-muted-foreground">
                   View All →
